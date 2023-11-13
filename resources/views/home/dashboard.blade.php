@@ -23,7 +23,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: 90vh;
         overflow: hidden;
         margin: 0;
     }
@@ -100,8 +100,8 @@
         transition: 0.2s ease;
     }
 </style>
+@include('partials.header')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-{{$data['Task 1']}}
 @if (($data))
 <p>Drag and drop a task to change the category</p>
 <div class="tasks-container">
