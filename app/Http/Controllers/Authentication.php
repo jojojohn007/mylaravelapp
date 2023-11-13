@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class Authentication extends Controller
 {
@@ -37,9 +38,13 @@ class Authentication extends Controller
         //Login attempt to database
 
 
-        Auth::attempt($credentials);
+        if (Auth::attempt($credentials)){
+            return redirect('auth')->with('email', $request->email);
 
-        return redirect('auth')->with('email', $request->email);
+        }else{
+            return redirect('/auth')->with('message', 'Failed to login');
+        }
+
     }
 
 
@@ -59,6 +64,18 @@ class Authentication extends Controller
                 'Task 5' => 'Clean the house',
             ];
             return redirect('dashboard');
+        }else{
+            //normal one
+            // return redirect('/auth')->with('message','Failed to login');
+            //redirect using facade redirect
+            // return Redirect::back();
+            //temporary redirection
+            return redirect('/auth',302);
+            //permanent redirection 
+            return redirect('/auth', 301);
+            //see other redirection 
+            return redirect('/auth', 303);
+
         };
     }
 }

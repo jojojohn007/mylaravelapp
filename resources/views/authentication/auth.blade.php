@@ -327,6 +327,16 @@
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
+                    <span class="btn-danger text-danger">
+                        @if ((session('message')) )
+                        {{session('message')}}
+
+                        @else
+
+                        @endif
+
+                    </span>
+
                 </form>
             </div>
             <div class="form-wrapper">
