@@ -88,6 +88,8 @@
         color: var(--completed);
     }
 
+
+
     .hold {
         border: solid 2px #ccc;
     }
@@ -101,7 +103,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 {{$data['Task 1']}}
 @if (($data))
-
 <p>Drag and drop a task to change the category</p>
 <div class="tasks-container">
     <div class="category to-do">
@@ -109,19 +110,14 @@
         <div class="list">
 
 
+            @foreach($data as $taskid => $task)
 
             <div class="task" draggable="true">
                 <div class="icon"><i class="fa-regular fa-circle"></i></div>
-                <h3>Task 1</h3>
-                Lorem ipsum dolor sit amet...
-            </div>
+                <h3>{{$taskid}}</h3>
+{{$task}}            </div>
 
-            <div class="task" draggable="true">
-                <div class="icon"><i class="fa-regular fa-circle"></i></div>
-                <h3>Task 2</h3>
-                Lorem ipsum dolor sit amet...
-            </div>
-
+@endforeach
 
         </div>
     </div>
@@ -131,7 +127,7 @@
 
             <div class="task" draggable="true">
                 <div class="icon"><i class="fa-solid fa-circle-half-stroke"></i></div>
-                <h3>Task 3</h3>
+                <h3>Task 6</h3>
                 Lorem ipsum dolor sit amet...
             </div>
 
