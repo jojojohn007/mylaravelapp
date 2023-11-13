@@ -70,11 +70,13 @@ class Authentication extends Controller
             //redirect using facade redirect
             // return Redirect::back();
             //temporary redirection
-            return redirect('/auth',302);
+            // return redirect('/auth',302);
             //permanent redirection 
-            return redirect('/auth', 301);
+            // return redirect('/auth', 301);
             //see other redirection 
-            return redirect('/auth', 303);
+            // return redirect('/auth', 303);
+
+            return redirect()->action('namespace App\Http\Controllers\Authentication@signupAction');
 
         };
     }
