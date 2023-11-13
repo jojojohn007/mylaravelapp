@@ -1,0 +1,3 @@
+{{($data)}}
+{{($user['name'])}}
+{{($myname)}}
