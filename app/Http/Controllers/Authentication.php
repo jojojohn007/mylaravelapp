@@ -38,13 +38,11 @@ class Authentication extends Controller
         //Login attempt to database
 
 
-        if (Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             return redirect('auth')->with('email', $request->email);
-
-        }else{
+        } else {
             return redirect('/auth')->with('message', 'Failed to login');
         }
-
     }
 
 
@@ -64,7 +62,7 @@ class Authentication extends Controller
                 'Task 5' => 'Clean the house',
             ];
             return redirect('dashboard');
-        }else{
+        } else {
             //normal one
             // return redirect('/auth')->with('message','Failed to login');
             //redirect using facade redirect
@@ -74,10 +72,15 @@ class Authentication extends Controller
             //permanent redirection 
             // return redirect('/auth', 301);
             //see other redirection 
-            // return redirect('/auth', 303);
+            return redirect('/auth', 303);
 
-            return redirect()->action('namespace App\Http\Controllers\Authentication@signupAction');
+            // return redirect()->action([Authentication::class,'show']);
 
         };
+    }
+    //doubt
+    public function show()
+    {
+        echo 'hey you just run a method using redirect() function';
     }
 }
