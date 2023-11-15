@@ -313,8 +313,9 @@
                     Login
                     <span class="underline"></span>
                 </button>
-                <form class="form form-login" method="post" action="{{route('login')}}">
+                <form class="form form-login" method="post" action="/login">
                     @csrf
+                    @method('POST')
                     <fieldset>
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
@@ -344,7 +345,7 @@
                     Sign Up
                     <span class="underline"></span>
                 </button>
-                <form class="form form-signup" method="post" action="{{route('signup')}}">
+                <form class="form form-signup" method="post" action="/signup">
                     @csrf
                     <fieldset>
                         <legend>Please, enter your email, password and password confirmation for sign up.</legend>

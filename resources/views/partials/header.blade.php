@@ -1,6 +1,4 @@
 <style>
-    
-
     #title {
         font-size: 24px;
     }
@@ -48,6 +46,21 @@
         gap: 40px;
     }
 
+    .dropdown-content a{
+        width: 100%;
+        font-size: 14px;
+        color: white;
+        border: none;
+        background-color: transparent;
+        border-radius: 4px;
+        transition: .2s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        text-decoration: none;
+    }
+
     .dropright.active>button,
     .dropdown-content button:hover {
         background-color: #ffffff59;
@@ -80,11 +93,11 @@
         pointer-events: none;
         transition: .3s;
         opacity: 0;
-
         padding: 6px;
         border-radius: 6px;
         background-color: #544b81;
         margin-top: 100px;
+        text-decoration: none;
 
         display: flex;
         flex-direction: column;
@@ -130,10 +143,10 @@
 <header>
     <!-- File -->
     <div class="dropdown">
-        <button class="dropdown-btn">File</button>
+        <button class="dropdown-btn">Task</button>
         <div class="dropdown-content">
             <button>
-                <span>New file</span>
+                <a href="/addtask">New task</a>
                 <span class="shortcut">Ctrl+N</span>
             </button>
             <button>
@@ -294,7 +307,7 @@
         <button class="dropdown-btn">Terminal</button>
         <div class="dropdown-content">
             <button>
-                <span>New Terminal</span>
+               <span>New Terminal</span>
                 <span class="shortcut">Ctrl+Shift+4</span>
             </button>
             <button>

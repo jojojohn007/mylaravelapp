@@ -73,6 +73,7 @@ class Authentication extends Controller
             // return redirect('/auth', 301);
             //see other redirection 
             return redirect('/auth', 303);
+            // return redirect()->seeOther('/auth');
 
             // return redirect()->action([Authentication::class,'show']);
 

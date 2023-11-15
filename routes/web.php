@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authentication;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,14 @@ Route::get('/dashboard', function () {
         'Task 4' => 'Run errands',
         'Task 5' => 'Clean the house',
     ];
+    $data = [
+        [
+            'title' => 'Task 1',
+            'description' => 'Doing assignment',
+            'status' => 'todo',
+            'id' => '1'
+        ]
+    ];
     return view('home/dashboard', ['data' => $data]);
 });
 
@@ -42,3 +51,17 @@ Route::post('/login', [Authentication::class, 'loginAction'])->name('login');
 Route::get('/page', function () {
     return view('page');
 });
+
+
+//working with database
+
+Route::get('/addtask', function () {
+    return view('task/addtask');
+});
+
+Route::get('/edit/{task}', [TaskController::class,'editScreen']);
+Route::put('/edit/{task}', [TaskController::class, 'updateTask']);
+Route::delete('/delete/{task}', [TaskController::class, 'deleteTask']);
+
+
+Route::put('/addtask', [TaskController::class, 'index']);

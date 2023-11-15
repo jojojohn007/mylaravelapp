@@ -99,6 +99,10 @@
         border-radius: 10px;
         transition: 0.2s ease;
     }
+
+    i {
+        color: white;
+    }
 </style>
 @include('partials.header')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -113,11 +117,24 @@
             @foreach($data as $taskid => $task)
 
             <div class="task" draggable="true">
-                <div class="icon"><i class="fa-regular fa-circle"></i></div>
-                <h3>{{$taskid}}</h3>
-{{$task}}            </div>
+                <div class="icon"><a href="/edit/{{$task['id']}}"><i class="fa-regular fa-edit"></i></a></div>
+                <h3>{{$task['title']}}</h3>
 
-@endforeach
+                {{$task['description']}}
+
+                <div>
+                    <form action="/delete/{{$task['id']}}" method="post">
+                        @csrf 
+                        @method('DELETE')
+                        <button class="fa-regular fa-remove"> 
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            @endforeach
 
         </div>
     </div>
