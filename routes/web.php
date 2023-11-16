@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\TaskController;
+use App\Http\Middleware\VerifyEmail;
+use App\Mail\MyEmail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,20 +21,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('auth');
 });
 Route::get('/auth', function () {
     return view('authentication/auth');
 });
 
-Route::get('/dashboard', function () {
-    $data = [
-        'Task 1' => 'Doing assignments',
-        'Task 2' => 'Finish coding project',
-        'Task 3' => 'Prepare for presentation',
-        'Task 4' => 'Run errands',
-        'Task 5' => 'Clean the house',
-    ];
+Route::get('/todolist', function () {
     $data = [
         [
             'title' => 'Task 1',
@@ -39,7 +37,7 @@ Route::get('/dashboard', function () {
         ]
     ];
     return view('home/dashboard', ['data' => $data]);
-});
+})->middleware('verified');
 
 //authentication 
 
@@ -59,9 +57,27 @@ Route::get('/addtask', function () {
     return view('task/addtask');
 });
 
+Auth::routes([
+'verify'=>true
+]);
+
 Route::get('/edit/{task}', [TaskController::class,'editScreen']);
 Route::put('/edit/{task}', [TaskController::class, 'updateTask']);
 Route::delete('/delete/{task}', [TaskController::class, 'deleteTask']);
 
 
 Route::put('/addtask', [TaskController::class, 'index']);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/email',function(){
+    Mail::to('jojojohn7777777@gmail.com')->send(new MyEmail());
+    return new MyEmail();
+});
+
+Route::get('/verify-email/{token}', function ($token) {
+    return redirect()->route('verification', ['token' => $token]);
+})->middleware(VerifyEmail::class);
+
+Route::get('/verification/{token}', [VerificationController::class, 'verify'])->name('verification');

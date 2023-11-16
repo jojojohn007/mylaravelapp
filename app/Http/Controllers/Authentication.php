@@ -6,11 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class Authentication extends Controller
+
 {
+    public function index(){
+    
+    }
     //Signup action
+
 
     public function signupAction(Request $request)
     {
@@ -39,7 +45,7 @@ class Authentication extends Controller
 
 
         if (Auth::attempt($credentials)) {
-            return redirect('auth')->with('email', $request->email);
+            return redirect('/dashboard')->with('email', $request->email);
         } else {
             return redirect('/auth')->with('message', 'Failed to login');
         }
