@@ -23,6 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $data = [
+            [
+                'title' => 'Task 1',
+                'description' => 'Doing assignment',
+                'status' => 'todo',
+                'id' => '1'
+            ]
+        ];
+        return view('home/dashboard', ['data' => $data]);
+        // return view('home');
     }
 }

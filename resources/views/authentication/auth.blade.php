@@ -308,14 +308,13 @@
     <section class="forms-section">
         <h1 class="section-title">Authentication form</h1>
         <div class="forms">
-            <div class="form-wrapper is-active">
+            <div class="form-wrapper ">
                 <button type="button" class="switcher switcher-login">
                     Login
                     <span class="underline"></span>
                 </button>
                 <form class="form form-login" method="post" action="/login">
                     @csrf
-                    @method('POST')
                     <fieldset>
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
@@ -328,6 +327,7 @@
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
+
                     <span class="btn-danger text-danger">
                         @if ((session('message')) )
                         {{session('message')}}
@@ -340,7 +340,8 @@
 
                 </form>
             </div>
-            <div class="form-wrapper">
+
+            <div class="form-wrapper  is-active ">
                 <button type="button" class="switcher switcher-signup">
                     Sign Up
                     <span class="underline"></span>
@@ -351,15 +352,24 @@
                         <legend>Please, enter your email, password and password confirmation for sign up.</legend>
                         <div class="input-block">
                             <label for="signup-email">E-mail</label>
-                            <input id="signup-email" type="email" name="email" required>
+                            <input id="signup-email" type="email" name="email" >
+                            @if($errors->has('email'))
+                            <div class="error">{{ $errors->first('email') }}</div>
+                            @endif
                         </div>
                         <div class="input-block">
                             <label for="signup-password">Password</label>
-                            <input id="signup-password" type="password" name="password" required>
+                            <input id="signup-password" type="password" name="password">
+                            @if($errors->has('password'))
+                            <div class="error">{{ $errors->first('password') }}</div>
+                            @endif
                         </div>
                         <div class="input-block">
                             <label for="signup-password-confirm">Confirm password</label>
-                            <input id="signup-password-confirm" type="password" name="confirmpassword" required>
+                            <input id="signup-password-confirm" type="password" name="password_confirmation">
+                            @if($errors->has('password_confirmation'))
+                            <div class="error">{{ $errors->first('password_confirmation') }}</div>
+                            @endif
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-signup">Continue</button>

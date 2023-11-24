@@ -98,9 +98,9 @@
         background-color: #544b81;
         margin-top: 100px;
         text-decoration: none;
-
         display: flex;
         flex-direction: column;
+        z-index: 1;
     }
 
     .dropdown.active .dropdown-btn {
@@ -343,8 +343,12 @@
             </button>
             <div class="line"></div>
             <button>
-                <span>about</span>
-            </button>
+<form action="/deleteuser" method="post">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Delete account</button>
+
+</form>            </button>
         </div>
     </div>
 </header>

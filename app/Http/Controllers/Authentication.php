@@ -2,33 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateValidationRequest;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
 
 class Authentication extends Controller
 
 {
-    public function index(){
-    
+
+    public function deleteAction(Task $task)
+    {
+
+        $userid = auth()->id();
+
+        $userid = auth()->id();
+        User::find($userid)->delete();
+
+        return view('authentication/auth');
+    }
+    public function index()
+    {
     }
     //Signup action
 
 
-    public function signupAction(Request $request)
+    public function signupAction(CreateValidationRequest $request)
     {
 
         //Validating user data
 
+$validator = $request->validated();
 
 
-        $request->validate([
-            'email' => 'required|email|max:250|unique:users',
-            'password' => 'required|min:8',
-        ]);
+        // $request->validate([
+        //     'email' => 'required|email|max:250|unique:users',
+        //     'password' => 'required|min:8',
+        // ]);
+
+        // $userdata = $request->only('email', 'password', 'password_confirmation');
+        // $rules = [
+        //     'email' => 'email|required|unique:users',
+        //     'password' => 'required|min:6|confirmed'
+        // ];
+        // $message = [
+
+        //     'confirmed'=>'Please re-enter confirm password correctly',
+        //     'min:8'=>':attribute field cannot be empty'
+
+        // ];
+        // $validator = Validator::make($userdata, $rules,$message);
+
+// dd($validator);
+        // if ($validator->fails()) {
+        //     $errors = $validator->errors();
+        //     return redirect()->back()->withErrors($errors);
+        // }
+
+
 
 
         User::create([
@@ -41,7 +76,7 @@ class Authentication extends Controller
 
         $credentials = $request->only('name', 'email', 'password');
 
-        //Login attempt to database
+    //Login attempt to database
 
 
         if (Auth::attempt($credentials)) {
@@ -52,12 +87,16 @@ class Authentication extends Controller
     }
 
 
-    public function loginAction(Request $request)
+    public function loginAction(CreateValidationRequest $request)
     {
+
+        // dd('hi');
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
+        // dd($credentials);
 
         if (Auth::attempt($credentials)) {
             $data = [

@@ -120,18 +120,16 @@
     }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,400,700&display=swap" rel="stylesheet">
-<div id="tasks" method="post">
-    @csrf
-    @method('PUT')
-    <h2 class="title">TODO LIST</h2>
+<div id="tasks" >
+     <h2 class="title">TODO LIST</h2>
     <p class="subtitle">Add a new task</p>
     <div>
-        <input id="title" type="text" placeholder="Title"></input>
+     <input id="title" type="text" placeholder="Title"></input>
         <input id="description" type="text" placeholder="Description"></input>
     </div>
     <br>
     <button class="submit_button" onclick="addTask()">+</button>
-    <form action="" method="post">
+    <form action="/addtask" method="post">
         @csrf
         @method('PUT')
 

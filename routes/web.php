@@ -8,6 +8,9 @@ use App\Mail\MyEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Monolog\Handler\RotatingFileHandler;
+use Illuminate\Html\Form;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +24,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth');
+    return view('authentication/auth');
 });
 Route::get('/auth', function () {
     return view('authentication/auth');
-});
+})->name('auth');
 
-Route::get('/todolist', function () {
+Route::get('/dashboard', function () {
     $data = [
         [
             'title' => 'Task 1',
@@ -58,26 +61,28 @@ Route::get('/addtask', function () {
 });
 
 Auth::routes([
-'verify'=>true
+    'verify' => true
 ]);
 
-Route::get('/edit/{task}', [TaskController::class,'editScreen']);
+Route::get('/edit/{task}', [TaskController::class, 'editScreen']);
 Route::put('/edit/{task}', [TaskController::class, 'updateTask']);
 Route::delete('/delete/{task}', [TaskController::class, 'deleteTask']);
 
 
-Route::put('/addtask', [TaskController::class, 'index']);
+Route::put('/addtask', [TaskController::class, 'addNewTaskAction']);
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get(
+    '/home',
+    [App\Http\Controllers\HomeController::class, 'index']
+)->name('home');
 
-Route::get('/email',function(){
-    Mail::to('jojojohn7777777@gmail.com')->send(new MyEmail());
-    return new MyEmail();
+Route::delete('/deleteuser', [Authentication::class, 'deleteAction']);
+
+Route::get('/login', function () {
+    return redirect('/auth');
 });
 
-Route::get('/verify-email/{token}', function ($token) {
-    return redirect()->route('verification', ['token' => $token]);
-})->middleware(VerifyEmail::class);
-
-Route::get('/verification/{token}', [VerificationController::class, 'verify'])->name('verification');
+Route::get('/signup', function () {
+    return redirect('/auth');
+});

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('status');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateValidationRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class TaskController extends Controller
 {
 
     
     //
-    public function index(Request $request)
+public function addNewTaskAction(Request $request)
     {
-        // dd(auth()->id() );
+        dd();
         // dump($request->input('_method'));
         $pattern = '/\d+/';
         $replacement = '';
@@ -67,7 +67,7 @@ class TaskController extends Controller
 
     public function editScreen(Task $task)
     {
-        // dd($task);
+
         return view('/task/taskedit',['task'=>$task]);
     }
     public function updateTask(Task $task, Request $request){
